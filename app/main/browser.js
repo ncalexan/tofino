@@ -200,15 +200,18 @@ let ws = undefined;
 
 
 profileStoragePromise.then(async function(profileStorage) {
-  await userAgentService.start(profileStorage, endpoints.UA_SERVICE_PORT, false);
+  // await userAgentService.start(profileStorage, endpoints.UA_SERVICE_PORT, false);
 
   ws = new WebSocket(`${endpoints.UA_SERVICE_WS}/diffs`);
 
   ws.on('open', () => {
+    console.log('opened');
     // Nothing for now.
   });
 
   ws.on('message', (data, flags) => {
+    console.log(`message ${data}`);
+
     // flags.binary will be set if a binary data is received.
     // flags.masked will be set if the data was masked.
     if (flags.binary) {

@@ -6,5 +6,5 @@ process.on('uncaughtException', console.error);
 process.on('unhandledRejection', console.error);
 
 ProfileStorage.open(path.join(__dirname, '..', '..')).then(async function (storage) {
-  await service.start(storage, 9090);
+  await service.start(storage, 9090, true);
 });
