@@ -27,6 +27,7 @@
     "express-validator": "2.20.4",
     "express-ws": "^2.0.0-rc.1",
     "immutable": "3.7.6",
+    "isomorphic-fetch": "2.2.1",
     "less-mkdirp": "1.0.1",
     "lodash": "4.12.0",
     "microtime-fast": "1.0.2",
@@ -43,9 +44,11 @@
     "thenify": "3.2.0",
     "thenify-all": "1.6.0",
     "true-html-escape": "0.0.2",
+    "twit": "2.2.4",
     "ws": "1.1.0"
   },
   "devDependencies": {
+    "babel-cli": "6.8.0",
     "babel-core": "6.7.4",
     "babel-eslint": "6.0.0-beta.6",
     "babel-preset-es2015-node5": "1.2.0",
