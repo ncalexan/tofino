@@ -17,11 +17,14 @@ specific language governing permissions and limitations under the License.
  * asynchronously).
  */
 function thunk({ dispatch, getState }) {
-  return next => action => {
+  return next => function handleActions(action) {
     if (typeof action === 'function') {
       return action(dispatch, getState);
     }
-
+    if (Array.isArray(action)) {
+      // Allow lists containing both thunks and other lists.
+      return action.forEach(handleActions);
+    }
     return next(action);
   };
 }

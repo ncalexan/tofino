@@ -34,7 +34,15 @@ export function createTab(location: ?string = undefined,
     const id = uuid.v4();
 
     // Start loading a tab while asking the User Agent to start its browsing session.
-    dispatch({ type: types.CREATE_TAB, id, ancestorId, location, options, instrument: true });
+    // Dispatching a list ensures only one render and prevents racing to set focus across user
+    // interactions.
+    const actions = [
+      { type: types.CREATE_TAB, id, ancestorId, location, options, instrument: true },
+    ];
+    if (options.selected) {
+      actions.push(setShowURLBar(true), setFocusedURLBar(true));
+    }
+    dispatch(actions);
 
     // TODO: properly track window scope.
     userAgent.createSession(id, { ancestor: ancestorId, reason }).then(({ session }) =>
