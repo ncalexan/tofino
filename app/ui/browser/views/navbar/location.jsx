@@ -406,7 +406,10 @@ Location.propTypes = {
   bookmark: PropTypes.func.isRequired,
   unbookmark: PropTypes.func.isRequired,
   navigateTo: PropTypes.func.isRequired,
-  userTypedLocation: PropTypes.string.isRequired,
+
+  // null is a valid uTL, which warns when `isRequired`.
+  userTypedLocation: PropTypes.string,
+
   showCompletions: PropTypes.bool.isRequired,
   showURLBar: PropTypes.bool.isRequired,
   focusedURLBar: PropTypes.bool.isRequired,
