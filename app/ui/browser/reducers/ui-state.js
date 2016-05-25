@@ -38,8 +38,6 @@ export default function uiState(state = initialState, action) {
     case types.RESET_UI_STATE:
       return state.withMutations((mut) => {
         mut.set('showCompletions', false);
-        mut.set('showURLBar', false);
-        mut.set('focusedURLBar', false);
       });
 
     case types.CLEAR_COMPLETIONS:
@@ -47,11 +45,11 @@ export default function uiState(state = initialState, action) {
 
     case types.SET_URL_INPUT_VISIBLE:
       assert(isUUID(action.pageId), 'SET_URL_INPUT_VISIBLE requires a page id.');
-      return state.set('showURLBar', action.payload.visible);
+      return state.setIn(['showURLBar', action.pageId], action.payload.visible);
 
     case types.SET_URL_INPUT_FOCUSED:
       assert(isUUID(action.pageId), 'SET_URL_INPUT_FOCUSED requires a page id.');
-      return state.set('focusedURLBar', action.payload.focused);
+      return state.setIn(['focusedURLBar', action.pageId], action.payload.focused);
 
     case types.SET_URL_INPUT_AUTOCOMPLETE_INDEX:
       return state.set('focusedResultIndex', action.payload.index);

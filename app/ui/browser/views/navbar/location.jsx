@@ -420,8 +420,8 @@ function mapStateToProps(state, ownProps) {
   return {
     userTypedLocation: selectors.getUserTypedLocation(state, ownProps.page.id),
     showCompletions: selectors.showCompletions(state),
-    showURLBar: selectors.showURLBar(state),
-    focusedURLBar: selectors.focusedURLBar(state),
+    showURLBar: selectors.showURLBar(state, ownProps.page.id),
+    focusedURLBar: selectors.focusedURLBar(state, ownProps.page.id),
     focusedResultIndex: selectors.focusedResultIndex(state),
   };
 }
