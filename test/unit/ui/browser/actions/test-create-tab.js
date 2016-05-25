@@ -65,8 +65,7 @@ describe('Action - CREATE_TAB', () => {
   it('Should create a new tab and focus it if selected', function() {
     const { getCurrentPageIndex, showURLBar, focusedURLBar, dispatch } = this;
     dispatch(actions.createTab());
-    dispatch(actions.setShowURLBar(false));
-    dispatch(actions.setFocusedURLBar(false));
+    dispatch(actions.resetUIState());
 
     // Assert initial conditions.
     expect(getCurrentPageIndex()).toEqual(0);
@@ -85,8 +84,7 @@ describe('Action - CREATE_TAB', () => {
   it('Should create a new tab but not focus it if not selected', function() {
     const { getCurrentPageIndex, showURLBar, focusedURLBar, dispatch } = this;
     dispatch(actions.createTab());
-    dispatch(actions.setShowURLBar(false));
-    dispatch(actions.setFocusedURLBar(false));
+    dispatch(actions.resetUIState());
 
     // Assert initial conditions.
     expect(getCurrentPageIndex()).toEqual(0);

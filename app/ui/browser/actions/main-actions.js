@@ -40,7 +40,8 @@ export function createTab(location: ?string = undefined,
       { type: types.CREATE_TAB, id, ancestorId, location, options, instrument: true },
     ];
     if (options.selected) {
-      actions.push(setShowURLBar(true), setFocusedURLBar(true));
+      actions.push(resetUIState()); // Reset global UI state before per-Page UI state.
+      actions.push(setShowURLBar(id, true), setFocusedURLBar(id, true));
     }
     dispatch(actions);
 
@@ -109,21 +110,27 @@ export function locationChanged(pageId: string, payload: Object): Action {
   };
 }
 
+export function resetUIState(): Action {
+  return (dispatch) => {
+    dispatch({ type: types.RESET_UI_STATE, instrument: false });
+  };
+}
+
 export function clearCompletions(): Action {
   return (dispatch) => {
     dispatch({ type: types.CLEAR_COMPLETIONS, instrument: false });
   };
 }
 
-export function setShowURLBar(visible) {
+export function setShowURLBar(pageId: string, visible: boolean) {
   return (dispatch) => {
-    dispatch({ type: types.SET_URL_INPUT_VISIBLE, payload: { visible } });
+    dispatch({ type: types.SET_URL_INPUT_VISIBLE, pageId, payload: { visible } });
   };
 }
 
-export function setFocusedURLBar(focused) {
+export function setFocusedURLBar(pageId: string, focused) {
   return (dispatch) => {
-    dispatch({ type: types.SET_URL_INPUT_FOCUSED, payload: { focused } });
+    dispatch({ type: types.SET_URL_INPUT_FOCUSED, pageId, payload: { focused } });
   };
 }
 
