@@ -16,6 +16,7 @@ import { readerify } from './reader';
 import Readability from './readability';
 import './scroll';
 import request from '../../ui/browser/lib/request';
+import './meta-events';
 
 window._readerify = readerify.bind(null, Readability);
 
