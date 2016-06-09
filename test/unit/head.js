@@ -3,6 +3,13 @@
 
 /* eslint-disable no-console */
 
+// Make mocha tests fail if a rejection is not handled.
+process.on('unhandledRejection', (reason, p) => {
+  console.error(`Unhandled Rejection at: Promise ${JSON.stringify(p)}`);
+  console.error(reason.stack);
+  // process.exit(2);
+});
+
 // Make mocha tests fail if a prop type validation fails.
 const error = console.error;
 console.error = function(warning, ...args) {

@@ -154,7 +154,8 @@ export function bookmark(pageId, url, title = undefined) {
     dispatch({ type: types.SET_BOOKMARK_STATE, url, isBookmarked: true, title });
 
     const page = getPageById(getState(), pageId);
-    userAgent.createStar(page, { url, title });
+    userAgent.createStar(page, { url, title }).catch((e) => { console.log(`bookmark ${e}`); });/* Ignore
+     failure */
   };
 }
 
@@ -164,7 +165,8 @@ export function unbookmark(pageId, url) {
     dispatch({ type: types.SET_BOOKMARK_STATE, url, isBookmarked: false });
 
     const page = getPageById(getState(), pageId);
-    userAgent.destroyStar(page, { url });
+    userAgent.destroyStar(page, { url }).catch((e) => { console.log(`unbookmark ${e}`); });/* Ignore
+     failure */
   };
 }
 

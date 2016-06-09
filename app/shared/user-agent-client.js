@@ -31,7 +31,7 @@ function uaRequest(url, service, options) {
 
       resolve(JSON.parse(body));
     });
-  });
+  }).catch(() => {});
 }
 
 class UserAgentClient extends EventEmitter {

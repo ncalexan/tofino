@@ -47,7 +47,7 @@ export function createSession(pageId, { scope = 0, ancestor, reason }) {
       ancestor,
       reason,
     },
-  });
+  }).catch((x) => { console.log(`createSession ${x}`); return { session: -1 }; });
 
   // Set the map from the page to a promise resolving to the session ID
   // immediately for future requests.
@@ -64,7 +64,7 @@ export async function destroySession(page, { reason }) {
       session,
       reason,
     },
-  });
+  }).catch((x) => { console.log(`destroySession ${x}`); return {}; });
 }
 
 export async function createPage(page, { url, readerResult }) {
@@ -85,7 +85,7 @@ export async function createStar(page, { url, title }) {
     // a new resource?
     method: 'PUT',
     json: { title, session },
-  });
+  }).catch((x) => { console.log(`createStar ${x}`); return {}; });
 }
 
 export async function destroyStar(page, { url }) {
@@ -93,7 +93,7 @@ export async function destroyStar(page, { url }) {
   return request(`/stars/${encodeURIComponent(url)}`, {
     method: 'DELETE',
     json: { session },
-  });
+  }).catch((x) => { console.log(`destroyStar ${x}`); return {}; });
 }
 
 export async function createHistory(page, { url, title }) {
